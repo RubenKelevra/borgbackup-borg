@@ -19,6 +19,7 @@ class CheckMixIn:
                 "This is a potentially dangerous function.\n"
                 "check --repair might lead to data loss (for kinds of corruption it is not\n"
                 "capable of dealing with). BE VERY CAREFUL!\n"
+                "Can be permanently confirmed by enviroment variable BORG_CHECK_I_KNOW_WHAT_I_AM_DOING.\n"
                 "\n"
                 "Type 'YES' if you understand this and want to continue: "
             )
