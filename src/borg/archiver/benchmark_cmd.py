@@ -237,7 +237,7 @@ class BenchmarkMixIn:
 
         bench_crud_epilog = process_epilog(
             """
-        This command benchmarks borg CRUD (create, read, update, delete) operations.
+        This command benchmarks borg's CRUD (create, read, update, delete) operations.
 
         It creates input data below the given PATH and backups this data into the given REPO.
         The REPO must already exist (it could be a fresh empty repo or an existing repo), the
@@ -283,7 +283,7 @@ class BenchmarkMixIn:
             description=self.do_benchmark_crud.__doc__,
             epilog=bench_crud_epilog,
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            help="Benchmarks borg CRUD (create, extract, update, delete).",
+            help="Benchmarks borg's CRUD (create, extract, update, delete) operations.",
         )
         subparser.set_defaults(func=self.do_benchmark_crud)
 
@@ -291,7 +291,7 @@ class BenchmarkMixIn:
 
         bench_cpu_epilog = process_epilog(
             """
-        This command benchmarks misc. CPU bound borg operations.
+        This command benchmarks borg's misc. CPU bound  operations.
 
         It creates input data in memory, runs the operation and then displays throughput.
         To reduce outside influence on the timings, please make sure to run this with:
