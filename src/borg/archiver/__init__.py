@@ -161,7 +161,7 @@ class Archiver(
         """
         Support class to allow specifying common options directly after the top-level command.
 
-        Normally options can only be specified on the parser defining them, which means
+        Normally, options can only be specified to the parser defining them, which means
         that generally speaking *all* options go after all sub-commands. This is annoying
         for common options in scripts, e.g. --remote-path or logging options.
 
@@ -512,7 +512,7 @@ class Archiver(
                     else:
                         # We use msgpack here instead of the marshal module used by cProfile itself,
                         # because the latter is insecure. Since these files may be shared over the
-                        # internet we don't want a format that is impossible to interpret outside
+                        # internet, we don't want a format that is impossible to interpret outside
                         # an insecure implementation.
                         # See scripts/msgpack2marshal.py for a small script that turns a msgpack file
                         # into a marshal file that can be read by e.g. pyprof2calltree.
@@ -524,7 +524,7 @@ class Archiver(
 
 
 def sig_info_handler(sig_no, stack):  # pragma: no cover
-    """search the stack for infos about the currently processed file and print them"""
+    """search the stack for info about the currently processed file and print them"""
     with signal_handler(sig_no, signal.SIG_IGN):
         for frame in inspect.getouterframes(stack):
             func, loc = frame[3], frame[0].f_locals
@@ -553,8 +553,8 @@ def sig_trace_handler(sig_no, stack):  # pragma: no cover
 
 
 def main():  # pragma: no cover
-    # Make sure stdout and stderr have errors='replace' to avoid unicode
-    # issues when print()-ing unicode file names
+    # Make sure stdout and stderr have errors='replace' to avoid Unicode
+    # issues when print()-ing Unicode file names
     sys.stdout = ErrorIgnoringTextIOWrapper(sys.stdout.buffer, sys.stdout.encoding, "replace", line_buffering=True)
     sys.stderr = ErrorIgnoringTextIOWrapper(sys.stderr.buffer, sys.stderr.encoding, "replace", line_buffering=True)
 
