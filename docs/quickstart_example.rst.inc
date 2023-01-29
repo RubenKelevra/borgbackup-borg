@@ -1,6 +1,6 @@
 1. Before a backup can be made, a repository has to be initialized::
 
-    $ borg -r /path/to/repo rcreate --encryption=repokey-aes-ocb
+    $ borg -r /path/to/repo rcreate --encryption=repokey-blake2-chacha20-poly1305
 
 2. Back up the ``~/src`` and ``~/Documents`` directories into an archive called
    *Monday*::
