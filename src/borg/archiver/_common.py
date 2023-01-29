@@ -96,12 +96,12 @@ def with_repository(
         decorator_name="with_repository",
     )
 
-    # To process the `--bypass-lock` option if specified, we need to
-    # modify `lock` inside `wrapper`. Therefore we cannot use the
+    # To process the `--bypass-lock` option, if specified, we need to
+    # modify `lock` inside `wrapper`. Therefore, we cannot use the
     # `nonlocal` statement to access `lock` as modifications would also
     # affect the scope outside of `wrapper`. Subsequent calls would
     # only see the overwritten value of `lock`, not the original one.
-    # The solution is to define a place holder variable `_lock` to
+    # The solution is to define a placeholder variable `_lock` to
     # propagate the value into `wrapper`.
     _lock = lock
 
@@ -163,9 +163,9 @@ def with_repository(
 
 def with_other_repository(manifest=False, cache=False, compatibility=None):
     """
-    this is a simplified version of "with_repository", just for the "other location".
+    This is a simplified version of "with_repository", just for the "other location".
 
-    the repository at the "other location" is intended to get used as a **source** (== read operations).
+    The repository at the "other location" is intended to get used as a **source** (== read operations).
     """
 
     compatibility = compat_check(
@@ -250,7 +250,7 @@ def with_archive(method):
 
 
 class Highlander(argparse.Action):
-    """make sure some option is only given once"""
+    """Make sure some option is only given once"""
 
     def __call__(self, parser, namespace, values, option_string=None):
         if getattr(namespace, self.dest, None) != self.default:
@@ -259,10 +259,10 @@ class Highlander(argparse.Action):
 
 
 # You can use :ref:`xyz` in the following usage pages. However, for plain-text view,
-# e.g. through "borg ... --help", define a substitution for the reference here.
+# e.g., through "borg ... --help", define a substitution for the reference here.
 # It will replace the entire :ref:`foo` verbatim.
 rst_plain_text_references = {
-    "a_status_oddity": '"I am seeing ‘A’ (added) status for a unchanged file!?"',
+    "a_status_oddity": '"I am seeing ‘A’ (added) status for an unchanged file!?"',
     "separate_compaction": '"Separate compaction"',
     "list_item_flags": '"Item flags"',
     "borg_patterns": '"borg help patterns"',
@@ -294,22 +294,22 @@ def define_exclude_and_patterns(add_option, *, tag_files=False, strip_components
         dest="patterns",
         type=parse_exclude_pattern,
         action="append",
-        help="exclude paths matching PATTERN",
+        help="Exclude paths matching PATTERN",
     )
     add_option(
         "--exclude-from",
         metavar="EXCLUDEFILE",
         action=ArgparseExcludeFileAction,
-        help="read exclude patterns from EXCLUDEFILE, one per line",
+        help="Read exclude patterns from EXCLUDEFILE, one per line",
     )
     add_option(
-        "--pattern", metavar="PATTERN", action=ArgparsePatternAction, help="include/exclude paths matching PATTERN"
+        "--pattern", metavar="PATTERN", action=ArgparsePatternAction, help="Include/exclude paths matching PATTERN"
     )
     add_option(
         "--patterns-from",
         metavar="PATTERNFILE",
         action=ArgparsePatternFileAction,
-        help="read include/exclude patterns from PATTERNFILE, one per line",
+        help="Read include/exclude patterns from PATTERNFILE, one per line",
     )
 
     if tag_files:
@@ -317,7 +317,7 @@ def define_exclude_and_patterns(add_option, *, tag_files=False, strip_components
             "--exclude-caches",
             dest="exclude_caches",
             action="store_true",
-            help="exclude directories that contain a CACHEDIR.TAG file " "(http://www.bford.info/cachedir/spec.html)",
+            help="Exclude directories that contain a CACHEDIR.TAG file " "(http://www.bford.info/cachedir/spec.html)",
         )
         add_option(
             "--exclude-if-present",
@@ -325,13 +325,13 @@ def define_exclude_and_patterns(add_option, *, tag_files=False, strip_components
             dest="exclude_if_present",
             action="append",
             type=str,
-            help="exclude directories that are tagged by containing a filesystem object with " "the given NAME",
+            help="Exclude directories that are tagged by containing a file system object with " "the given NAME",
         )
         add_option(
             "--keep-exclude-tags",
             dest="keep_exclude_tags",
             action="store_true",
-            help="if tag objects are specified with ``--exclude-if-present``, "
+            help="If tag objects are specified with ``--exclude-if-present``, "
             "don't omit the tag objects themselves from the backup archive",
         )
 
@@ -364,7 +364,7 @@ def define_archive_filters_group(subparser, *, sort_by=True, first_last=True, ol
         metavar="PATTERN",
         dest="match_archives",
         action=Highlander,
-        help='only consider archive names matching the pattern. see "borg help match-archives".',
+        help='Only consider archive names matching the pattern. See "borg help match-archives".',
     )
 
     if sort_by:
@@ -388,7 +388,7 @@ def define_archive_filters_group(subparser, *, sort_by=True, first_last=True, ol
             dest="first",
             default=0,
             type=positive_int_validator,
-            help="consider first N archives after other filters were applied",
+            help="Consider first N archives after other filters were applied",
         )
         group.add_argument(
             "--last",
@@ -396,7 +396,7 @@ def define_archive_filters_group(subparser, *, sort_by=True, first_last=True, ol
             dest="last",
             default=0,
             type=positive_int_validator,
-            help="consider last N archives after other filters were applied",
+            help="Consider last N archives after other filters were applied",
         )
 
     if oldest_newest:
@@ -406,14 +406,14 @@ def define_archive_filters_group(subparser, *, sort_by=True, first_last=True, ol
             metavar="TIMESPAN",
             type=relative_time_marker_validator,
             dest="oldest",
-            help="consider archives between the oldest archive's timestamp and (oldest + TIMESPAN), e.g. 7d or 12m.",
+            help="Consider archives between the oldest archive's timestamp and (oldest + TIMESPAN), e.g., 7d or 12m.",
         )
         group.add_argument(
             "--newest",
             metavar="TIMESPAN",
             type=relative_time_marker_validator,
             dest="newest",
-            help="consider archives between the newest archive's timestamp and (newest - TIMESPAN), e.g. 7d or 12m.",
+            help="Consider archives between the newest archive's timestamp and (newest - TIMESPAN), e.g., 7d or 12m.",
         )
 
     if older_newer:
@@ -423,28 +423,28 @@ def define_archive_filters_group(subparser, *, sort_by=True, first_last=True, ol
             metavar="TIMESPAN",
             type=relative_time_marker_validator,
             dest="older",
-            help="consider archives older than (now - TIMESPAN), e.g. 7d oder 12m.",
+            help="Consider archives older than (now - TIMESPAN), e.g., 7d or 12m.",
         )
         group.add_argument(
             "--newer",
             metavar="TIMESPAN",
             type=relative_time_marker_validator,
             dest="newer",
-            help="consider archives newer than (now - TIMESPAN), e.g. 7d or 12m.",
+            help="Consider archives newer than (now - TIMESPAN), e.g., 7d or 12m.",
         )
 
     return filters_group
 
 
 def define_common_options(add_common_option):
-    add_common_option("-h", "--help", action="help", help="show this help message and exit")
+    add_common_option("-h", "--help", action="help", help="Show this help message and exit")
     add_common_option(
         "--critical",
         dest="log_level",
         action="store_const",
         const="critical",
         default="warning",
-        help="work on log level CRITICAL",
+        help="Work on log level CRITICAL",
     )
     add_common_option(
         "--error",
@@ -452,7 +452,7 @@ def define_common_options(add_common_option):
         action="store_const",
         const="error",
         default="warning",
-        help="work on log level ERROR",
+        help="Work on log level ERROR",
     )
     add_common_option(
         "--warning",
@@ -460,7 +460,7 @@ def define_common_options(add_common_option):
         action="store_const",
         const="warning",
         default="warning",
-        help="work on log level WARNING (default)",
+        help="Work on log level WARNING (default)",
     )
     add_common_option(
         "--info",
@@ -470,7 +470,7 @@ def define_common_options(add_common_option):
         action="store_const",
         const="info",
         default="warning",
-        help="work on log level INFO",
+        help="Work on log level INFO",
     )
     add_common_option(
         "--debug",
@@ -478,7 +478,7 @@ def define_common_options(add_common_option):
         action="store_const",
         const="debug",
         default="warning",
-        help="enable debug output, work on log level DEBUG",
+        help="Enable debug output, work on log level DEBUG",
     )
     add_common_option(
         "--debug-topic",
@@ -486,11 +486,11 @@ def define_common_options(add_common_option):
         dest="debug_topics",
         action="append",
         default=[],
-        help="enable TOPIC debugging (can be specified multiple times). "
+        help="Enable TOPIC debugging (can be specified multiple times). "
         "The logger path is borg.debug.<TOPIC> if TOPIC is not fully qualified.",
     )
-    add_common_option("-p", "--progress", dest="progress", action="store_true", help="show progress information")
-    add_common_option("--iec", dest="iec", action="store_true", help="format using IEC units (1KiB = 1024B)")
+    add_common_option("-p", "--progress", dest="progress", action="store_true", help="Show progress information")
+    add_common_option("--iec", dest="iec", action="store_true", help="Format using IEC units (1KiB = 1024B)")
     add_common_option(
         "--log-json",
         dest="log_json",
@@ -503,7 +503,7 @@ def define_common_options(add_common_option):
         dest="lock_wait",
         type=int,
         default=int(os.environ.get("BORG_LOCK_WAIT", 1)),
-        help="wait at most SECONDS for acquiring a repository/cache lock (default: %(default)d).",
+        help="Wait at most SECONDS for acquiring a repository/cache lock (default: %(default)d).",
     )
     add_common_option(
         "--bypass-lock",
@@ -512,48 +512,48 @@ def define_common_options(add_common_option):
         default=argparse.SUPPRESS,  # only create args attribute if option is specified
         help="Bypass locking mechanism",
     )
-    add_common_option("--show-version", dest="show_version", action="store_true", help="show/log the borg version")
-    add_common_option("--show-rc", dest="show_rc", action="store_true", help="show/log the return code (rc)")
+    add_common_option("--show-version", dest="show_version", action="store_true", help="Show/log the borg version")
+    add_common_option("--show-rc", dest="show_rc", action="store_true", help="Show/log the return code (rc)")
     add_common_option(
         "--umask",
         metavar="M",
         dest="umask",
         type=lambda s: int(s, 8),
         default=UMASK_DEFAULT,
-        help="set umask to M (local only, default: %(default)04o)",
+        help="Set umask to M (local only, default: %(default)04o)",
     )
     add_common_option(
         "--remote-path",
         metavar="PATH",
         dest="remote_path",
-        help='use PATH as borg executable on the remote (default: "borg")',
+        help='Use PATH as borg executable on the remote (default: "borg")',
     )
     add_common_option(
         "--upload-ratelimit",
         metavar="RATE",
         dest="upload_ratelimit",
         type=int,
-        help="set network upload rate limit in kiByte/s (default: 0=unlimited)",
+        help="Set network upload rate limit in kiByte/s (default: 0=unlimited)",
     )
     add_common_option(
         "--upload-buffer",
         metavar="UPLOAD_BUFFER",
         dest="upload_buffer",
         type=int,
-        help="set network upload buffer size in MiB. (default: 0=no buffer)",
+        help="Set network upload buffer size in MiB. (default: 0=no buffer)",
     )
     add_common_option(
         "--consider-part-files",
         dest="consider_part_files",
         action="store_true",
-        help="treat part files like normal files (e.g. to list/extract them)",
+        help="Treat part files like normal files (e.g., to list/extract them)",
     )
     add_common_option(
         "--debug-profile",
         metavar="FILE",
         dest="debug_profile",
         default=None,
-        help="Write execution profile in Borg format into FILE. For local use a Python-"
+        help="Write execution profile in Borg format into FILE. For local use, a Python-"
         'compatible file can be generated by suffixing FILE with ".pyprof".',
     )
     add_common_option(
@@ -569,7 +569,7 @@ def define_common_options(add_common_option):
         dest="location",
         type=location_validator(other=False),
         default=Location(other=False),
-        help="repository to use",
+        help="Repository to use",
     )
 
 
