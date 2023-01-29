@@ -240,10 +240,10 @@ class BenchmarkMixIn:
         This command benchmarks borg CRUD (create, read, update, delete) operations.
 
         It creates input data below the given PATH and backups this data into the given REPO.
-        The REPO must already exist (it could be a fresh empty repo or an existing repo, the
+        The REPO must already exist (it could be a fresh empty repo or an existing repo), the
         command will create / read / update / delete some archives named borg-benchmark-crud\\* there.
 
-        Make sure you have free space there, you'll need about 1GB each (+ overhead).
+        Make sure you have free space there, you'll need about 1 GB each (+ overhead).
 
         If your repository is encrypted and borg needs a passphrase to unlock the key, use::
 
@@ -255,8 +255,8 @@ class BenchmarkMixIn:
         Also, due to the kind of content used, no compression is used in these benchmarks.
 
         C- == borg create (1st archive creation, no compression, do not use files cache)
-              C-Z- == all-zero files. full dedup, this is primarily measuring reader/chunker/hasher.
-              C-R- == random files. no dedup, measuring throughput through all processing stages.
+              C-Z- == all-zero files. Full dedup, this is primarily measuring reader/chunker/hasher.
+              C-R- == random files. No dedup, measuring throughput through all processing stages.
 
         R- == borg extract (extract archive, dry-run, do everything, but do not write files to disk)
               R-Z- == all zero files. Measuring heavily duplicated files.
@@ -273,7 +273,7 @@ class BenchmarkMixIn:
               D-R- == many chunks to delete / many segments to compact/remove.
 
         Please note that there might be quite some variance in these measurements.
-        Try multiple measurements and having a otherwise idle machine (and network, if you use it).
+        Try multiple measurements and having an otherwise idle machine (and network, if you use it).
         """
         )
         subparser = benchmark_parsers.add_parser(
@@ -283,11 +283,11 @@ class BenchmarkMixIn:
             description=self.do_benchmark_crud.__doc__,
             epilog=bench_crud_epilog,
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            help="benchmarks borg CRUD (create, extract, update, delete).",
+            help="Benchmarks borg CRUD (create, extract, update, delete).",
         )
         subparser.set_defaults(func=self.do_benchmark_crud)
 
-        subparser.add_argument("path", metavar="PATH", help="path were to create benchmark input data")
+        subparser.add_argument("path", metavar="PATH", help="Defines the path where benchmark input data should be created.")
 
         bench_cpu_epilog = process_epilog(
             """
@@ -296,8 +296,8 @@ class BenchmarkMixIn:
         It creates input data in memory, runs the operation and then displays throughput.
         To reduce outside influence on the timings, please make sure to run this with:
 
-        - an otherwise as idle as possible machine
-        - enough free memory so there will be no slow down due to paging activity
+        - An otherwise as idle as possible machine
+        - With sufficient free memory, to avoid slowdowns due to paging activity
         """
         )
         subparser = benchmark_parsers.add_parser(
@@ -307,6 +307,6 @@ class BenchmarkMixIn:
             description=self.do_benchmark_cpu.__doc__,
             epilog=bench_cpu_epilog,
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            help="benchmarks borg CPU bound operations.",
+            help="Benchmarks borg's CPU bound operations.",
         )
         subparser.set_defaults(func=self.do_benchmark_cpu)
