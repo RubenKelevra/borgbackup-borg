@@ -878,7 +878,7 @@ Encryption
 AEAD modes
 ~~~~~~~~~~
 
-For new repositories, borg will use the modern AEAD cipher CHACHA20-POLY1305 (AES-OCB can be used as an alternative).
+For new repositories, borg will use the modern AEAD cipher ChaCha20-Poly1305 (AES-OCB can be used as an alternative).
 
 For each borg invocation, a new sessionkey is derived from the borg key material
 and the 48bit IV starts from 0 again (both ciphers internally add a 32bit counter
