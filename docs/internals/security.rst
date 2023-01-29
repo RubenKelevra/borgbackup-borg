@@ -135,7 +135,7 @@ with associated data) and session keys.
 
 Depending on the mode chosen (see :ref:`borg_rcreate`), different AEAD ciphers are used:
 
-- chacha20-poly1305 - very fast cipher, with a high security rating (recommended)
+- ChaCha20-Poly1305 - very fast cipher, with a high security rating (recommended)
 - AES-OCB - fast if hardware accelerated by the processor, with the AES instruction set
 
 The chunk ID is derived via a MAC over the plaintext (mac key taken from borg key):
@@ -220,7 +220,7 @@ user-chosen passphrase.
 A 256 bit key encryption key (KEK) is derived from the passphrase
 using argon2_ with a random 256 bit salt. The KEK is then used
 to Encrypt-*then*-MAC a packed representation of the keys using the
-chacha20-poly1305 AEAD cipher and a constant IV == 0.
+ChaCha20-Poly1305 AEAD cipher and a constant IV == 0.
 The ciphertext is then converted to base64.
 
 This base64 blob (commonly referred to as *keyblob*) is then stored in
@@ -242,12 +242,12 @@ Implementations used
 We do not implement cryptographic primitives ourselves, but rely
 on widely used libraries providing them:
 
-- AES-OCB and CHACHA20-POLY1305 from OpenSSL 1.1 are used,
+- AES-OCB and ChaCha20-Poly1305 from OpenSSL 1.1 are used,
   which is also linked into the static binaries we provide.
   We think this is not an additional risk, since we don't ever
   use OpenSSL's networking, TLS or X.509 code, but only their
   primitives implemented in libcrypto.
-- SHA-256, SHA-512 and BLAKE2b from Python's hashlib_ standard library module are used.
+- SHA-256, SHA-512 and Blake2b from Python's hashlib_ standard library module are used.
 - HMAC and a constant-time comparison from Python's hmac_ standard library module are used.
 - argon2 is used via argon2-cffi.
 
